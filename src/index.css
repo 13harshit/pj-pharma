@@ -1,0 +1,205 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Core Colors - Premium Pharmaceutical Theme */
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Primary - Deep Teal */
+    --primary: 187 85% 35%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 187 85% 45%;
+    --primary-dark: 187 85% 25%;
+
+    /* Secondary - Navy Blue */
+    --secondary: 220 50% 15%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Accent - Bright Cyan */
+    --accent: 185 95% 45%;
+    --accent-foreground: 220 50% 10%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 187 85% 35%;
+
+    --radius: 0.75rem;
+
+    /* Custom Colors */
+    --hero-gradient-start: 220 50% 8%;
+    --hero-gradient-end: 220 45% 15%;
+    --glass: 0 0% 100%;
+    --glass-border: 0 0% 100%;
+    --glow: 185 95% 50%;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 50% 6%;
+    --foreground: 210 40% 98%;
+
+    --card: 220 50% 10%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 220 50% 10%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 185 95% 45%;
+    --primary-foreground: 220 50% 8%;
+
+    --secondary: 220 40% 20%;
+    --secondary-foreground: 210 40% 98%;
+
+    --accent: 185 95% 50%;
+    --accent-foreground: 220 50% 8%;
+
+    --muted: 220 40% 15%;
+    --muted-foreground: 215 20% 65%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 40% 18%;
+    --input: 220 40% 18%;
+    --ring: 185 95% 45%;
+
+    --hero-gradient-start: 220 50% 4%;
+    --hero-gradient-end: 220 45% 10%;
+    --glass: 220 50% 15%;
+    --glass-border: 220 40% 25%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+@layer components {
+  /* Glass Morphism */
+  .glass {
+    @apply bg-glass/80 backdrop-blur-xl border border-glass-border/20;
+  }
+
+  .glass-dark {
+    @apply bg-secondary/80 backdrop-blur-xl border border-white/10;
+  }
+
+  /* Gradient Backgrounds */
+  .gradient-hero {
+    background: linear-gradient(135deg, hsl(var(--hero-gradient-start)) 0%, hsl(var(--hero-gradient-end)) 100%);
+  }
+
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+  }
+
+  /* Glow Effects */
+  .glow {
+    box-shadow: 0 0 40px hsl(var(--glow) / 0.3), 0 0 80px hsl(var(--glow) / 0.2);
+  }
+
+  .glow-sm {
+    box-shadow: 0 0 20px hsl(var(--glow) / 0.2);
+  }
+
+  /* Text Styles */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Section Spacing */
+  .section-padding {
+    @apply py-20 md:py-32;
+  }
+
+  /* Container */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  /* Animation Delays */
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+  .animation-delay-500 { animation-delay: 500ms; }
+  .animation-delay-700 { animation-delay: 700ms; }
+  .animation-delay-1000 { animation-delay: 1000ms; }
+
+  /* Perspective for 3D */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  /* Custom Scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Noise Texture */
+  .noise {
+    position: relative;
+  }
+  .noise::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+  }
+}
