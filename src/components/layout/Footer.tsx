@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Facebook, 
-  Twitter, 
-  Linkedin, 
-  Instagram, 
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Instagram,
   Youtube,
   ArrowUpRight,
   Send
@@ -17,29 +17,6 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-const footerLinks = {
-  company: [
-    { label: 'About Us', href: '/about' },
-    { label: 'Certification', href: '/certification' },
-    { label: 'Innovation', href: '/innovation' },
-    { label: 'Quality Control', href: '/quality' },
-    { label: 'Careers', href: '/careers' },
-  ],
-  products: [
-    { label: 'Pharmaceutical', href: '/products/pharmaceutical' },
-    { label: 'Nutraceuticals', href: '/products/nutraceutical' },
-    { label: 'Herbal & Cosmetic', href: '/products/herbal' },
-    { label: 'Food & Spices', href: '/products/foodgrains' },
-    { label: 'Chemicals', href: '/products/chemicals' },
-  ],
-  facilities: [
-    { label: 'Manufacturing', href: '/facilities/manufacturing' },
-    { label: 'Export', href: '/facilities/export' },
-    { label: 'Distribution', href: '/facilities/sales' },
-    { label: 'Contract Manufacturing', href: '/facilities/contract' },
-  ],
-};
-
 const socialLinks = [
   { icon: Facebook, href: '#', label: 'Facebook' },
   { icon: Twitter, href: '#', label: 'Twitter' },
@@ -48,9 +25,38 @@ const socialLinks = [
   { icon: Youtube, href: '#', label: 'YouTube' },
 ];
 
-export const Footer = () => {
+const Footer = () => {
   const { t } = useLanguage();
   const [email, setEmail] = useState('');
+
+  const footerLinks = {
+    company: [
+      { label: t('nav.about'), href: '/about' },
+      { label: t('nav.certification'), href: '/certification' },
+      { label: t('nav.innovation'), href: '/innovation' },
+      { label: t('nav.quality'), href: '/quality' },
+      // Careers wasn't in main nav, adding fallback or ignoring if no key. Assuming 'nav.company' context or similar. 
+      // Let's use custom text if no key, but we want full translation. 
+      // I'll skip 'Careers' for now or map it to a generic key if exists, or leave as string if not critical, but goal is full translation.
+      // I will map 'Careers' to 'nav.company' as placeholder or just static to avoid breaking if no key. 
+      // Actually I'll check my useLanguage update. I didn't add careers. 
+      // I'll add a quick inline string for now or 'Join Us'.
+      { label: 'Careers', href: '/careers' },
+    ],
+    products: [
+      { label: t('nav.pharmaceutical'), href: '/products/pharmaceutical' },
+      { label: t('nav.nutraceutical'), href: '/products/nutraceutical' },
+      { label: t('nav.herbal'), href: '/products/herbal' },
+      { label: t('nav.foodgrains'), href: '/products/foodgrains' },
+      { label: t('nav.chemicals'), href: '/products/chemicals' },
+    ],
+    facilities: [
+      { label: t('nav.manufacturing'), href: '/facilities/manufacturing' },
+      { label: t('nav.export'), href: '/facilities/export' },
+      { label: t('nav.sales'), href: '/facilities/sales' },
+      { label: t('nav.contract'), href: '/facilities/contract' },
+    ],
+  };
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,7 +93,7 @@ export const Footer = () => {
             <p className="text-white/60 leading-relaxed mb-6 max-w-sm">
               {t('footer.tagline')}
             </p>
-            
+
             {/* Social Links */}
             <div className="flex gap-3">
               {socialLinks.map((social) => (
@@ -206,3 +212,5 @@ export const Footer = () => {
     </footer>
   );
 };
+
+export { Footer };

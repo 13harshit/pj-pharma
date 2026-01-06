@@ -1,62 +1,90 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Globe } from 'lucide-react';
+import { Menu, X, Search, ChevronDown, ChevronRight, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage, languages } from '@/hooks/useLanguage';
 
-interface NavItem {
+interface SubMenuItem {
   label: string;
-  href?: string;
-  children?: { label: string; href: string; description?: string }[];
+  href: string;
+  children?: SubMenuItem[];
 }
 
-const navItems: NavItem[] = [
-  { label: 'nav.home', href: '/' },
-  {
-    label: 'nav.company',
-    children: [
-      { label: 'nav.about', href: '/about', description: 'Learn about our journey and values' },
-      { label: 'nav.certification', href: '/certification', description: 'Our quality certifications' },
-      { label: 'nav.regulatory', href: '/regulatory', description: 'Regulatory compliance' },
-      { label: 'nav.innovation', href: '/innovation', description: 'R&D and innovation initiatives' },
-      { label: 'nav.quality', href: '/quality', description: 'Quality control processes' },
-    ],
-  },
-  {
-    label: 'nav.products',
-    children: [
-      { label: 'nav.pharmaceutical', href: '/products/pharmaceutical', description: 'Tablets, Capsules, Syrups & more' },
-      { label: 'nav.nutraceutical', href: '/products/nutraceutical', description: 'Health supplements' },
-      { label: 'nav.herbal', href: '/products/herbal', description: 'Natural products' },
-      { label: 'nav.foodgrains', href: '/products/foodgrains', description: 'Food commodities' },
-      { label: 'nav.chemicals', href: '/products/chemicals', description: 'Industrial chemicals' },
-    ],
-  },
-  { label: 'nav.rd', href: '/research' },
-  {
-    label: 'nav.facilities',
-    children: [
-      { label: 'nav.manufacturing', href: '/facilities/manufacturing', description: 'State-of-the-art production' },
-      { label: 'nav.export', href: '/facilities/export', description: 'Global export operations' },
-      { label: 'nav.sales', href: '/facilities/sales', description: 'Distribution network' },
-      { label: 'nav.contract', href: '/facilities/contract', description: 'Third-party manufacturing' },
-    ],
-  },
-  { label: 'nav.contact', href: '/contact' },
-];
+interface NavItem {
+  label: string;
+  href: string;
+  hasDropdown?: boolean;
+  submenu?: SubMenuItem[];
+}
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [languageOpen, setLanguageOpen] = useState(false);
+  const [activeSubDropdown, setActiveSubDropdown] = useState<string | null>(null);
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
   const location = useLocation();
-  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const navItems: NavItem[] = [
+    { label: t('nav.home'), href: '/' },
+    {
+      label: t('nav.company'),
+      href: '#',
+      hasDropdown: true,
+      submenu: [
+        { label: t('nav.about'), href: '/about' },
+        { label: t('nav.certification'), href: '/certification' },
+        { label: t('nav.regulatory'), href: '/regulatory' },
+        { label: t('nav.innovation'), href: '/innovation' },
+        { label: t('nav.quality'), href: '/quality-control' }
+      ]
+    },
+    {
+      label: t('nav.products'),
+      href: '#',
+      hasDropdown: true,
+      submenu: [
+        {
+          label: t('nav.pharmaceutical'),
+          href: '/products/pharmaceutical',
+          children: [
+            { label: 'TABLETS, CAPSULES, SYRUP', href: '/products/pharmaceutical/general' },
+            { label: 'CARDIO CARE', href: '/products/pharmaceutical/cardio' },
+            { label: 'INJECTIONS', href: '/products/pharmaceutical/injections' },
+            { label: 'SOFT GEL CAPSULES', href: '/products/pharmaceutical/softgel' },
+            { label: 'SUPPOSITORY', href: '/products/pharmaceutical/suppository' },
+            { label: 'IV FLUIDS', href: '/products/pharmaceutical/iv-fluids' },
+            { label: 'ANTICANCER DRUGS', href: '/products/pharmaceutical/anticancer' },
+            { label: 'DIGNOSTICS KITS', href: '/products/pharmaceutical/diagnostics' },
+          ]
+        },
+        { label: t('nav.nutraceutical'), href: '/products/nutraceutical' },
+        { label: t('nav.herbal'), href: '/products/herbal' },
+        { label: t('nav.foodgrains'), href: '/products/food-grains' },
+        { label: t('nav.chemicals'), href: '/products/chemicals' },
+        { label: t('nav.oil'), href: '/products/oil-lubricants' }
+      ]
+    },
+    { label: t('nav.rd'), href: '/research' },
+    {
+      label: t('nav.facilities'),
+      href: '#',
+      hasDropdown: true,
+      submenu: [
+        { label: t('nav.manufacturing'), href: '/facilities/manufacturing' },
+        { label: t('nav.export'), href: '/facilities/export' },
+        { label: t('nav.sales'), href: '/facilities/sales' },
+        { label: t('nav.contract'), href: '/facilities/contract' }
+      ]
+    },
+    { label: t('nav.contact'), href: '/contact' },
+  ];
+
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -64,135 +92,131 @@ export const Navbar = () => {
   useEffect(() => {
     setIsOpen(false);
     setActiveDropdown(null);
+    setActiveSubDropdown(null);
+    setIsLanguageOpen(false);
   }, [location]);
 
+  const currentLanguage = languages.find(l => l.code === language) || languages[0];
+
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'bg-background/90 backdrop-blur-xl shadow-soft border-b border-border/50' : 'bg-transparent'
-      }`}
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-2' : 'bg-transparent py-4'
+        }`}
     >
-      <nav className="container-custom">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link to="/" className="relative z-10">
-            <motion.div
-              className="flex items-center gap-3"
-              whileHover={{ scale: 1.02 }}
-            >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-glow">
-                <span className="text-primary-foreground font-heading font-bold text-lg">GJ</span>
-              </div>
-              <div className="hidden sm:block">
-                <span className="font-heading font-bold text-xl text-foreground">GJ Pharma</span>
-                <span className="block text-[10px] text-muted-foreground tracking-widest uppercase">Healthcare Excellence</span>
-              </div>
-            </motion.div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
+          <Link to="/" className="flex items-center space-x-2">
+            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-500">
+              GJ Pharmaceuticals
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1" ref={dropdownRef}>
+          <div className="hidden lg:flex items-center space-x-6">
             {navItems.map((item) => (
               <div
                 key={item.label}
-                className="relative"
-                onMouseEnter={() => item.children && setActiveDropdown(item.label)}
-                onMouseLeave={() => setActiveDropdown(null)}
+                className="relative group"
+                onMouseEnter={() => setActiveDropdown(item.label)}
+                onMouseLeave={() => {
+                  setActiveDropdown(null);
+                  setActiveSubDropdown(null);
+                }}
               >
-                {item.href ? (
-                  <Link
-                    to={item.href}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                      location.pathname === item.href
-                        ? 'text-primary bg-primary/10'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                    }`}
-                  >
-                    {t(item.label)}
-                  </Link>
-                ) : (
-                  <button
-                    className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                      activeDropdown === item.label
-                        ? 'text-primary bg-primary/10'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                    }`}
-                  >
-                    {t(item.label)}
-                    <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === item.label ? 'rotate-180' : ''}`} />
-                  </button>
-                )}
+                <Link
+                  to={item.href}
+                  className="flex items-center text-sm font-medium text-slate-700 hover:text-primary transition-colors py-2"
+                >
+                  {item.label}
+                  {item.hasDropdown && (
+                    <ChevronDown className="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-200" />
+                  )}
+                </Link>
 
-                {/* Dropdown */}
                 <AnimatePresence>
-                  {item.children && activeDropdown === item.label && (
+                  {activeDropdown === item.label && item.submenu && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 pt-2 w-72"
+                      className="absolute top-full left-0 w-64 bg-white rounded-xl shadow-xl border border-slate-100 py-2 mt-1"
                     >
-                      <div className="bg-card rounded-2xl border border-border shadow-soft-lg p-2 overflow-hidden">
-                        {item.children.map((child) => (
+                      {item.submenu.map((subItem) => (
+                        <div
+                          key={subItem.label}
+                          className="relative"
+                          onMouseEnter={() => setActiveSubDropdown(subItem.label)}
+                          onMouseLeave={() => setActiveSubDropdown(null)}
+                        >
                           <Link
-                            key={child.href}
-                            to={child.href}
-                            className="block p-3 rounded-xl hover:bg-muted/50 transition-colors group"
+                            to={subItem.href}
+                            className="flex items-center justify-between px-4 py-2.5 text-sm text-slate-600 hover:text-primary hover:bg-slate-50 transition-colors"
                           >
-                            <span className="font-medium text-foreground group-hover:text-primary transition-colors">
-                              {t(child.label)}
-                            </span>
-                            {child.description && (
-                              <span className="block text-xs text-muted-foreground mt-0.5">
-                                {child.description}
-                              </span>
-                            )}
+                            <span>{subItem.label}</span>
+                            {subItem.children && <ChevronRight className="w-4 h-4 ml-2" />}
                           </Link>
-                        ))}
-                      </div>
+
+                          {/* Nested Dropdown */}
+                          {subItem.children && activeSubDropdown === subItem.label && (
+                            <motion.div
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              className="absolute left-full top-0 w-64 bg-white rounded-xl shadow-xl border border-slate-100 py-2 ml-1"
+                            >
+                              {subItem.children.map((child) => (
+                                <Link
+                                  key={child.label}
+                                  to={child.href}
+                                  className="block px-4 py-2.5 text-sm text-slate-600 hover:text-primary hover:bg-slate-50 transition-colors"
+                                >
+                                  {child.label}
+                                </Link>
+                              ))}
+                            </motion.div>
+                          )}
+                        </div>
+                      ))}
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
             ))}
-          </div>
 
-          {/* Right Side */}
-          <div className="flex items-center gap-3">
             {/* Language Selector */}
-            <div className="relative">
-              <button
-                onClick={() => setLanguageOpen(!languageOpen)}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
-              >
-                <Globe className="w-4 h-4" />
-                <span className="hidden sm:inline">{languages.find(l => l.code === language)?.flag}</span>
+            <div
+              className="relative group"
+              onMouseEnter={() => setIsLanguageOpen(true)}
+              onMouseLeave={() => setIsLanguageOpen(false)}
+            >
+              <button className="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors border border-dashed border-slate-300">
+                <span className="text-lg">{currentLanguage.flag}</span>
+                <span className="text-sm font-medium text-slate-700">{currentLanguage.name}</span>
+                <ChevronDown className="w-4 h-4 text-slate-500 group-hover:rotate-180 transition-transform" />
               </button>
-              
+
               <AnimatePresence>
-                {languageOpen && (
+                {isLanguageOpen && (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="absolute top-full right-0 mt-2 w-40 bg-card rounded-xl border border-border shadow-soft-lg p-1 z-50"
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full right-0 w-[600px] bg-white rounded-xl shadow-2xl border border-slate-100 p-6 mt-2 grid grid-cols-3 gap-y-3 gap-x-6 z-50"
                   >
                     {languages.map((lang) => (
                       <button
                         key={lang.code}
                         onClick={() => {
                           setLanguage(lang.code);
-                          setLanguageOpen(false);
+                          setIsLanguageOpen(false);
                         }}
-                        className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${
-                          language === lang.code ? 'bg-primary/10 text-primary' : 'hover:bg-muted/50'
-                        }`}
+                        className="flex items-center space-x-3 p-2 rounded-lg hover:bg-slate-50 transition-colors text-left group/lang"
                       >
-                        <span>{lang.flag}</span>
-                        <span>{lang.name}</span>
+                        <span className="text-2xl shadow-sm rounded-sm bg-slate-50">{lang.flag}</span>
+                        <span className={`text-sm font-medium ${language === lang.code ? 'text-primary' : 'text-slate-600 group-hover/lang:text-slate-900'}`} >
+                          {lang.name}
+                        </span>
                       </button>
                     ))}
                   </motion.div>
@@ -200,20 +224,29 @@ export const Navbar = () => {
               </AnimatePresence>
             </div>
 
-            <Button variant="hero" size="sm" asChild className="hidden sm:inline-flex">
-              <Link to="/contact">{t('hero.cta.contact')}</Link>
-            </Button>
+            <div className="flex items-center">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search here..."
+                  className="pl-4 pr-10 py-2 rounded-full border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm bg-slate-50 hover:bg-white w-48 transition-all focus:w-64"
+                />
+                <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              </div>
+            </div>
+          </div>
 
-            {/* Mobile Menu Button */}
+          {/* Mobile menu button & Search */}
+          <div className="flex lg:hidden items-center space-x-4">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden p-2 rounded-lg hover:bg-muted/50 transition-colors"
+              className="text-slate-700 hover:text-primary transition-colors p-2"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
-      </nav>
+      </div>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -222,61 +255,103 @@ export const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-background border-t border-border overflow-hidden"
+            className="lg:hidden bg-white border-t border-slate-100 overflow-hidden shadow-xl"
           >
-            <div className="container-custom py-4 space-y-2">
+            <div className="px-4 py-6 space-y-4">
               {navItems.map((item) => (
                 <div key={item.label}>
-                  {item.href ? (
-                    <Link
-                      to={item.href}
-                      className={`block px-4 py-3 rounded-lg font-medium ${
-                        location.pathname === item.href
-                          ? 'text-primary bg-primary/10'
-                          : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                      }`}
+                  <Link
+                    to={item.href}
+                    className="block text-slate-600 font-medium hover:text-primary transition-colors flex items-center justify-between"
+                    onClick={(e) => {
+                      if (item.hasDropdown) {
+                        e.preventDefault();
+                        setActiveDropdown(activeDropdown === item.label ? null : item.label);
+                      }
+                    }}
+                  >
+                    {item.label}
+                    {item.hasDropdown && (
+                      <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === item.label ? 'rotate-180' : ''}`} />
+                    )}
+                  </Link>
+                  {/* Mobile Submenu */}
+                  {item.hasDropdown && item.submenu && activeDropdown === item.label && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      className="pl-4 mt-2 space-y-2 border-l-2 border-slate-100"
                     >
-                      {t(item.label)}
-                    </Link>
-                  ) : (
-                    <div>
-                      <button
-                        onClick={() => setActiveDropdown(activeDropdown === item.label ? null : item.label)}
-                        className="w-full flex items-center justify-between px-4 py-3 rounded-lg font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                      >
-                        {t(item.label)}
-                        <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === item.label ? 'rotate-180' : ''}`} />
-                      </button>
-                      <AnimatePresence>
-                        {activeDropdown === item.label && item.children && (
-                          <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="overflow-hidden"
+                      {item.submenu.map((subItem) => (
+                        <div key={subItem.label}>
+                          <Link
+                            to={subItem.href}
+                            className="block text-sm text-slate-500 hover:text-primary py-1 flex items-center justify-between"
+                            onClick={(e) => {
+                              if (subItem.children) {
+                                e.preventDefault();
+                                setActiveSubDropdown(activeSubDropdown === subItem.label ? null : subItem.label);
+                              }
+                            }}
                           >
-                            <div className="pl-4 py-2 space-y-1">
-                              {item.children.map((child) => (
+                            {subItem.label}
+                            {subItem.children && (
+                              <ChevronDown className={`w-3 h-3 transition-transform ${activeSubDropdown === subItem.label ? 'rotate-180' : ''}`} />
+                            )}
+                          </Link>
+
+                          {/* Mobile Nested Submenu */}
+                          {subItem.children && activeSubDropdown === subItem.label && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              className="pl-4 mt-1 space-y-1 border-l-2 border-slate-100"
+                            >
+                              {subItem.children.map((child) => (
                                 <Link
-                                  key={child.href}
+                                  key={child.label}
                                   to={child.href}
-                                  className="block px-4 py-2 rounded-lg text-sm text-muted-foreground hover:text-primary hover:bg-primary/5"
+                                  className="block text-xs text-slate-400 hover:text-primary py-1"
                                 >
-                                  {t(child.label)}
+                                  {child.label}
                                 </Link>
                               ))}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
+                            </motion.div>
+                          )}
+                        </div>
+                      ))}
+                    </motion.div>
                   )}
                 </div>
               ))}
+              <div className="pt-4 border-t border-slate-100">
+                <div className="flex items-center gap-2 text-slate-600 mb-4">
+                  <span className="text-xl">{currentLanguage.flag}</span>
+                  <span>{currentLanguage.name}</span>
+                </div>
+                <div className="grid grid-cols-2 gap-2 mb-4">
+                  {languages.slice(0, 6).map(lang => (
+                    <button key={lang.code} onClick={() => setLanguage(lang.code)} className="flex items-center gap-2 p-2 border rounded text-xs">
+                      <span>{lang.flag}</span>{lang.name}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Search here..."
+                    className="w-full pl-4 pr-10 py-2 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:border-primary"
+                  />
+                  <button className="absolute right-2 top-1/2 -translate-y-1/2 text-primary">
+                    <Search className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </nav>
   );
 };

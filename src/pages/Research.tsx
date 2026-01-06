@@ -75,7 +75,7 @@ const Research = () => {
               <span className="block gradient-text">Development</span>
             </h1>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              Our state-of-the-art R&D facilities drive innovation in pharmaceutical sciences, 
+              Our state-of-the-art R&D facilities drive innovation in pharmaceutical sciences,
               developing novel formulations and therapeutic solutions that address unmet medical needs globally.
             </p>
           </motion.div>
@@ -127,6 +127,26 @@ const Research = () => {
         </div>
       </section>
 
+      {/* Research & Development Text Section */}
+      <section className="py-20 bg-muted/20">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-6">
+              Research & Development
+            </h2>
+            <p className="text-muted-foreground text-lg leading-relaxed">
+              In the dynamic landscape of pharmaceuticals, Research and Development (R&D) stands as the cornerstone of innovation and progress.
+              At GJ Pharmaceuticals LLP, we recognize the pivotal role of R&D in shaping the future of healthcare and pharmaceutical solutions.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Capabilities */}
       <section className="py-20 bg-muted/30">
         <div className="container-custom">
@@ -143,7 +163,7 @@ const Research = () => {
                 Advanced Facilities & Equipment
               </h2>
               <p className="text-muted-foreground mb-8">
-                Our R&D center is equipped with cutting-edge instruments and facilities 
+                Our R&D center is equipped with cutting-edge instruments and facilities
                 to support comprehensive pharmaceutical research and development activities.
               </p>
 
