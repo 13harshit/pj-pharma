@@ -136,6 +136,7 @@ const About = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 1.5 }}
+                    fetchPriority="high"
                   />
                 </AnimatePresence>
 
@@ -227,7 +228,7 @@ const About = () => {
           {/* Our Team */}
           <div className="grid md:grid-cols-2 gap-12 items-center md:flex-row-reverse">
             <div className="order-2 md:order-1 hidden md:block h-64 bg-slate-200 rounded-2xl">
-              <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')] bg-cover bg-center rounded-2xl opacity-80 mix-blend-multiply"></div>
+              <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')] bg-cover bg-center rounded-2xl opacity-80 mix-blend-multiply" role="img" aria-label="Team meeting"></div>
             </div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -290,6 +291,7 @@ const About = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 1 }}
+                        loading="lazy"
                       />
                     </AnimatePresence>
                     {/* Overlay Badge */}
@@ -360,6 +362,7 @@ const About = () => {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.8 }}
+                      loading="lazy"
                     />
                   </AnimatePresence>
                 </div>

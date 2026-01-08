@@ -15,6 +15,7 @@ const FoodGrains = () => {
                     src="/food-grains-hero.png"
                     alt="Food Grains, Oils & Spices"
                     className="absolute inset-0 w-full h-full object-cover"
+                    fetchPriority="high"
                 />
 
                 {/* Overlay Block */}

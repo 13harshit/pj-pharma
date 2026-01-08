@@ -250,6 +250,7 @@ const HerbalAndCosmetics = () => {
                             src="/Herbal-and-Cosmetics.jpg"
                             alt="Herbal and Cosmetics"
                             className="absolute inset-0 w-full h-full object-cover"
+                            fetchPriority="high"
                         />
                     </div>
                     <div className="lg:w-1/2 p-8 lg:p-12 bg-emerald-900 text-white flex flex-col justify-center">
