@@ -35,20 +35,14 @@ const Footer = () => {
       { label: t('nav.about'), href: '/about' },
       { label: t('nav.certification'), href: '/certification' },
       { label: t('nav.innovation'), href: '/innovation' },
-      { label: t('nav.quality'), href: '/quality' },
-      // Careers wasn't in main nav, adding fallback or ignoring if no key. Assuming 'nav.company' context or similar. 
-      // Let's use custom text if no key, but we want full translation. 
-      // I'll skip 'Careers' for now or map it to a generic key if exists, or leave as string if not critical, but goal is full translation.
-      // I will map 'Careers' to 'nav.company' as placeholder or just static to avoid breaking if no key. 
-      // Actually I'll check my useLanguage update. I didn't add careers. 
-      // I'll add a quick inline string for now or 'Join Us'.
-      { label: 'Careers', href: '/careers' },
+      { label: t('nav.quality'), href: '/quality-control' },
+      { label: 'Regulatory', href: '/regulatory' },
     ],
     products: [
       { label: t('nav.pharmaceutical'), href: '/products/pharmaceutical' },
       { label: t('nav.nutraceutical'), href: '/products/nutraceutical' },
-      { label: t('nav.herbal'), href: '/products/herbal' },
-      { label: t('nav.foodgrains'), href: '/products/foodgrains' },
+      { label: t('nav.herbal'), href: '/herbal-and-cosmetics' },
+      { label: t('nav.foodgrains'), href: '/products/food-grains' },
       { label: t('nav.chemicals'), href: '/products/chemicals' },
     ],
     facilities: [
