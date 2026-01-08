@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useState, useEffect, KeyboardEvent } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Search, ChevronDown, ChevronRight, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -26,6 +26,22 @@ export const Navbar = () => {
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
   const location = useLocation();
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+      setSearchQuery('');
+      setIsOpen(false);
+    }
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   const navItems: NavItem[] = [
     { label: t('nav.home'), href: '/' },
@@ -227,9 +243,17 @@ export const Navbar = () => {
                 <input
                   type="text"
                   placeholder="Search here..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={handleKeyDown}
                   className="pl-4 pr-10 py-2 rounded-full border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm bg-slate-50 hover:bg-white w-48 transition-all focus:w-64"
                 />
-                <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <button
+                  onClick={handleSearch}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors"
+                >
+                  <Search className="w-4 h-4" />
+                </button>
               </div>
             </div>
           </div>
@@ -339,9 +363,14 @@ export const Navbar = () => {
                   <input
                     type="text"
                     placeholder="Search here..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     className="w-full pl-4 pr-10 py-2 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:border-primary"
                   />
-                  <button className="absolute right-2 top-1/2 -translate-y-1/2 text-primary">
+                  <button
+                    onClick={handleSearch}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-primary">
                     <Search className="w-5 h-5" />
                   </button>
                 </div>

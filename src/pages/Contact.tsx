@@ -2,6 +2,8 @@ import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import Seo from '@/components/Seo';
+import PageWrapper from '@/components/PageWrapper';
 import { Button } from '@/components/ui/button';
 import { Building, Phone, Mail, FileText, Send } from 'lucide-react';
 import { toast } from 'sonner';
@@ -37,7 +39,7 @@ const Contact = () => {
     {
       icon: Phone,
       title: t('contact.call'),
-      details: ['+91 9167369755', '+91 7977299867','(Call & WhatsApp)'],
+      details: ['+91 9167369755', '+91 7977299867', '(Call & WhatsApp)'],
     },
     {
       icon: Mail,
@@ -68,7 +70,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#E0F7FA]/30"> {/* Light mix background */}
+    <PageWrapper className="bg-[#E0F7FA]/30"> {/* Light mix background */}
       <Navbar />
 
       {/* Hero Section - Reduced height for better focus on content */}
@@ -218,7 +220,7 @@ const Contact = () => {
       </section>
 
       <Footer />
-    </div>
+    </PageWrapper>
   );
 };
 

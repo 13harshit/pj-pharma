@@ -4,6 +4,8 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Target, Eye, Users, CheckCircle, Trophy, Globe, Briefcase, Pill, Syringe, Droplet, FlaskConical, Stethoscope } from 'lucide-react';
+import Seo from '@/components/Seo';
+import PageWrapper from '@/components/PageWrapper';
 
 const About = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -80,7 +82,11 @@ const About = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
+    <PageWrapper>
+      <Seo
+        title="About Us"
+        description="Learn about TG PHARMZ's history, mission, and commitment to pharmaceutical excellence. WHO-GMP certified manufacturing."
+      />
       <Navbar />
 
       {/* Hero / Welcome Section */}
@@ -438,7 +444,7 @@ const About = () => {
       </section>
 
       <Footer />
-    </div>
+    </PageWrapper>
   );
 };
 

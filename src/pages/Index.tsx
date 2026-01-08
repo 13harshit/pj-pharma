@@ -9,6 +9,8 @@ import { useEffect, useState } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 
 import { Link } from 'react-router-dom';
+import Seo from '@/components/Seo';
+import PageWrapper from '@/components/PageWrapper';
 
 const Index = () => {
   const { t } = useLanguage();
@@ -31,7 +33,11 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col font-sans">
+    <PageWrapper>
+      <Seo
+        title="Home"
+        description="TG PHARMZ LLP - Leading Pharmaceutical Manufacturer & Exporter. High-quality tablets, injections, and healthcare products."
+      />
       <Navbar />
 
       <main className="flex-grow">
@@ -179,45 +185,55 @@ const Index = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-center mb-8">
               {[
-                { icon: <Pill className="w-8 h-8 text-blue-500" />, title: t('nav.pharmaceutical'), desc: t('hero.description'), link: "#" },
-                { icon: <Leaf className="w-8 h-8 text-green-500" />, title: t('nav.nutraceutical'), desc: "Premium quality dietary supplements, vitamins, minerals, and functional foods for optimal health.", link: "#" },
-                { icon: <Sprout className="w-8 h-8 text-emerald-600" />, title: t('nav.herbal'), desc: "Natural and herbal formulations, cosmetic products with botanical extracts and traditional remedies.", link: "#" },
+                { icon: <Pill className="w-8 h-8 text-blue-500" />, title: t('nav.pharmaceutical'), desc: t('hero.description'), link: "/products/pharmaceutical" },
+                { icon: <Leaf className="w-8 h-8 text-green-500" />, title: t('nav.nutraceutical'), desc: "Premium quality dietary supplements, vitamins, minerals, and functional foods for optimal health.", link: "/products/nutraceutical" },
+                { icon: <Sprout className="w-8 h-8 text-emerald-600" />, title: t('nav.herbal'), desc: "Natural and herbal formulations, cosmetic products with botanical extracts and traditional remedies.", link: "/herbal-and-cosmetics" },
               ].map((card, idx) => (
-                <motion.div
+                <Link
                   key={idx}
-                  whileHover={{ y: -5 }}
-                  className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition-all"
+                  to={card.link}
+                  className="block group"
                 >
-                  <div className="w-14 h-14 rounded-xl bg-slate-50 flex items-center justify-center mb-6">
-                    {card.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-3">{card.title}</h3>
-                  <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3">{card.desc}</p>
-                  <a href={card.link} className="inline-flex items-center text-blue-600 font-semibold text-sm hover:translate-x-1 transition-transform">
-                    {t('common.learnMore')} <ArrowRight className="w-4 h-4 ml-1" />
-                  </a>
-                </motion.div>
+                  <motion.div
+                    whileHover={{ y: -5 }}
+                    className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition-all h-full"
+                  >
+                    <div className="w-14 h-14 rounded-xl bg-slate-50 flex items-center justify-center mb-6">
+                      {card.icon}
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 mb-3">{card.title}</h3>
+                    <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3">{card.desc}</p>
+                    <div className="inline-flex items-center text-blue-600 font-semibold text-sm group-hover:translate-x-1 transition-transform">
+                      {t('common.learnMore')} <ArrowRight className="w-4 h-4 ml-1" />
+                    </div>
+                  </motion.div>
+                </Link>
               ))}
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               {[
-                { icon: <Globe2 className="w-8 h-8 text-amber-500" />, title: t('nav.foodgrains'), desc: "Premium quality food grains, edible oils, and authentic spices sourced from trusted suppliers.", link: "#" },
-                { icon: <FlaskConical className="w-8 h-8 text-purple-500" />, title: t('nav.chemicals'), desc: "Industrial and fine chemicals meeting stringent quality standards for various applications.", link: "#" },
+                { icon: <Globe2 className="w-8 h-8 text-amber-500" />, title: t('nav.foodgrains'), desc: "Premium quality food grains, edible oils, and authentic spices sourced from trusted suppliers.", link: "/products/food-grains" },
+                { icon: <FlaskConical className="w-8 h-8 text-purple-500" />, title: t('nav.chemicals'), desc: "Industrial and fine chemicals meeting stringent quality standards for various applications.", link: "/oil-and-lubricants" },
               ].map((card, idx) => (
-                <motion.div
+                <Link
                   key={idx}
-                  whileHover={{ y: -5 }}
-                  className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition-all"
+                  to={card.link}
+                  className="block group"
                 >
-                  <div className="w-14 h-14 rounded-xl bg-slate-50 flex items-center justify-center mb-6">
-                    {card.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-3">{card.title}</h3>
-                  <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3">{card.desc}</p>
-                  <a href={card.link} className="inline-flex items-center text-blue-600 font-semibold text-sm hover:translate-x-1 transition-transform">
-                    {t('common.learnMore')} <ArrowRight className="w-4 h-4 ml-1" />
-                  </a>
-                </motion.div>
+                  <motion.div
+                    whileHover={{ y: -5 }}
+                    className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition-all h-full"
+                  >
+                    <div className="w-14 h-14 rounded-xl bg-slate-50 flex items-center justify-center mb-6">
+                      {card.icon}
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 mb-3">{card.title}</h3>
+                    <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3">{card.desc}</p>
+                    <div className="inline-flex items-center text-blue-600 font-semibold text-sm group-hover:translate-x-1 transition-transform">
+                      {t('common.learnMore')} <ArrowRight className="w-4 h-4 ml-1" />
+                    </div>
+                  </motion.div>
+                </Link>
               ))}
             </div>
           </div>
@@ -265,25 +281,30 @@ const Index = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                { icon: <div className="relative"><Pill className="w-10 h-10 text-slate-600" /><Pill className="w-10 h-10 text-slate-600 absolute -top-1 -right-2 rotate-45 opacity-70" /></div>, label: "TABLETS, CAPSULES, SYRUP" },
-                { icon: <Syringe className="w-12 h-12 text-slate-600" />, label: "INJECTIONS" },
-                { icon: <div className="flex gap-1"><div className="w-1 h-8 bg-slate-400 rounded-full"></div><div className="w-1 h-6 bg-slate-400 rounded-full mt-2"></div></div>, label: "IV FLUIDS" },
-                { icon: <div className="relative"><FlaskConical className="w-10 h-10 text-slate-600" /><Pill className="w-5 h-5 text-slate-600 absolute bottom-0 -right-1" /></div>, label: "ANTICANCER DRUGS" },
-                { icon: <HeartPulse className="w-12 h-12 text-slate-600" />, label: "CARDIO CARE" },
-                { icon: <div className="flex gap-2"><div className="w-6 h-10 rounded-full border-2 border-slate-600 transform -rotate-12"></div><div className="w-6 h-10 rounded-full border-2 border-slate-600 transform rotate-12 bg-slate-200"></div></div>, label: "SOFT GEL CAPSULES" },
-                { icon: <div className="w-12 h-8 rounded-[50%] border-2 border-slate-600 mt-2 flex items-center justify-center text-xs font-bold text-slate-500">SUPPLE</div>, label: "SUPPOSITORY" },
-                { icon: <BriefcaseMedical className="w-12 h-12 text-slate-600" />, label: "DIGNOSTICS KITS" },
+                { icon: <div className="relative"><Pill className="w-10 h-10 text-slate-600" /><Pill className="w-10 h-10 text-slate-600 absolute -top-1 -right-2 rotate-45 opacity-70" /></div>, label: "TABLETS, CAPSULES, SYRUP", path: "/products/pharmaceutical/general" },
+                { icon: <Syringe className="w-12 h-12 text-slate-600" />, label: "INJECTIONS", path: "/products/pharmaceutical/injections" },
+                { icon: <div className="flex gap-1"><div className="w-1 h-8 bg-slate-400 rounded-full"></div><div className="w-1 h-6 bg-slate-400 rounded-full mt-2"></div></div>, label: "IV FLUIDS", path: "/products/pharmaceutical/iv-fluids" },
+                { icon: <div className="relative"><FlaskConical className="w-10 h-10 text-slate-600" /><Pill className="w-5 h-5 text-slate-600 absolute bottom-0 -right-1" /></div>, label: "ANTICANCER DRUGS", path: "/products/pharmaceutical/anticancer" },
+                { icon: <HeartPulse className="w-12 h-12 text-slate-600" />, label: "CARDIO CARE", path: "/products/pharmaceutical/cardio" },
+                { icon: <div className="flex gap-2"><div className="w-6 h-10 rounded-full border-2 border-slate-600 transform -rotate-12"></div><div className="w-6 h-10 rounded-full border-2 border-slate-600 transform rotate-12 bg-slate-200"></div></div>, label: "SOFT GEL CAPSULES", path: "/products/pharmaceutical/softgel" },
+                { icon: <div className="w-12 h-8 rounded-[50%] border-2 border-slate-600 mt-2 flex items-center justify-center text-xs font-bold text-slate-500">SUPPLE</div>, label: "SUPPOSITORY", path: "/products/pharmaceutical/suppository" },
+                { icon: <BriefcaseMedical className="w-12 h-12 text-slate-600" />, label: "DIGNOSTICS KITS", path: "/products/pharmaceutical/diagnostics" },
               ].map((product, index) => (
-                <motion.div
+                <Link
                   key={index}
-                  whileHover={{ y: -5, boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)" }}
-                  className="bg-white rounded-[2rem] p-8 flex flex-col items-center justify-center text-center shadow-lg border border-slate-100 h-64 cursor-pointer transition-all duration-300"
+                  to={product.path}
+                  className="block"
                 >
-                  <div className="w-24 h-24 rounded-full border-2 border-slate-200 flex items-center justify-center mb-6 text-slate-600">
-                    {product.icon}
-                  </div>
-                  <h3 className="font-bold text-slate-800 text-sm tracking-wider uppercase">{product.label}</h3>
-                </motion.div>
+                  <motion.div
+                    whileHover={{ y: -5, boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)" }}
+                    className="bg-white rounded-[2rem] p-8 flex flex-col items-center justify-center text-center shadow-lg border border-slate-100 h-64 cursor-pointer transition-all duration-300"
+                  >
+                    <div className="w-24 h-24 rounded-full border-2 border-slate-200 flex items-center justify-center mb-6 text-slate-600">
+                      {product.icon}
+                    </div>
+                    <h3 className="font-bold text-slate-800 text-sm tracking-wider uppercase">{product.label}</h3>
+                  </motion.div>
+                </Link>
               ))}
             </div>
           </div>
@@ -339,7 +360,7 @@ const Index = () => {
 
       </main>
       <Footer />
-    </div>
+    </PageWrapper>
   );
 };
 
