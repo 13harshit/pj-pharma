@@ -87,7 +87,7 @@ const Manufacturing = () => {
                                     Manufacturing
                                 </h1>
                                 <p className="text-gray-100 font-medium leading-relaxed">
-                                    At GJ Pharmaceuticals LLP, our manufacturing prowess stands as a testament to our commitment to excellence and innovation across diverse product categories. Our state-of-the-art facilities and stringent processes ensure the production of high-quality products that meet global standards.
+                                    At TG PHARMZ LLP, our manufacturing prowess stands as a testament to our commitment to excellence and innovation across diverse product categories. Our state-of-the-art facilities and stringent processes ensure the production of high-quality products that meet global standards.
                                 </p>
                             </motion.div>
                         </div>
@@ -138,7 +138,7 @@ const Manufacturing = () => {
                             Commitment to Excellence & Innovation
                         </h2>
                         <p className="text-muted-foreground">
-                            At GJ Pharmaceuticals LLP, our manufacturing isn’t just about producing goods; it’s about delivering excellence, innovation, and reliability in every product we create.
+                            At TG PHARMZ LLP, our manufacturing isn’t just about producing goods; it’s about delivering excellence, innovation, and reliability in every product we create.
                         </p>
                     </motion.div>
 

@@ -10,7 +10,8 @@ import {
   Instagram,
   Youtube,
   ArrowUpRight,
-  Send
+  Send,
+  ShoppingBag
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -79,32 +80,30 @@ const Footer = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-12 border-b border-white/10">
           {/* Brand */}
           <div className="lg:col-span-4">
-            <Link to="/" className="inline-block mb-6">
-              <div className="flex items-center gap-3">
-                <img src="/tg-pharmz-logo.png" alt="TG PHARMZ" className="h-12 w-auto" />
-                <div>
-                  <span className="font-heading font-bold text-2xl text-white">TG PHARMZ</span>
-                  <span className="block text-xs text-white/50 tracking-widest uppercase">Healthcare Excellence</span>
+            {/* Company Info */}
+            <div className="space-y-6">
+              <Link to="/" className="flex items-center gap-2 group">
+                <div className="p-2 bg-white/10 rounded-lg group-hover:bg-white/20 transition-colors backdrop-blur-sm">
+                  <ShoppingBag className="w-8 h-8 text-blue-400" />
                 </div>
+                <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-300">
+                  TG Pharmz
+                </span>
+              </Link>
+              <p className="text-slate-400 leading-relaxed text-sm">
+                Dedicated to improving global health through innovative pharmaceutical solutions. Excellence in every drop, quality in every pill.
+              </p>
+              <div className="flex gap-4">
+                {[Facebook, Twitter, Linkedin, Instagram].map((Icon, index) => (
+                  <a
+                    key={index}
+                    href="#"
+                    className="w-10 h-10 rounded-lg bg-slate-800/50 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-all duration-300 hover:-translate-y-1"
+                  >
+                    <Icon className="w-5 h-5" />
+                  </a>
+                ))}
               </div>
-            </Link>
-            <p className="text-white/60 leading-relaxed mb-6 max-w-sm">
-              {t('footer.tagline')}
-            </p>
-
-            {/* Social Links */}
-            <div className="flex gap-3">
-              {socialLinks.map((social) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  className="w-10 h-10 rounded-xl bg-white/5 hover:bg-primary/20 flex items-center justify-center text-white/60 hover:text-primary transition-colors"
-                  aria-label={social.label}
-                >
-                  <social.icon className="w-5 h-5" />
-                </motion.a>
-              ))}
             </div>
           </div>
 
@@ -181,11 +180,11 @@ const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-3 text-white/60">
                 <MapPin className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                <span>123 Pharma Complex, Industrial Area, Mumbai, India</span>
+                <span>Goregoan, Mumbai, India</span>
               </li>
               <li className="flex items-center gap-3 text-white/60">
                 <Phone className="w-4 h-4 text-primary shrink-0" />
-                <span>+91 22 1234 5678</span>
+                <span>+91 7977299867</span>
               </li>
               <li className="flex items-center gap-3 text-white/60">
                 <Mail className="w-4 h-4 text-primary shrink-0" />
@@ -195,15 +194,15 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white/40 text-sm">
-            © {new Date().getFullYear()} TG PHARMZ. {t('footer.rights')}
-          </p>
-          <div className="flex gap-6 text-sm text-white/40">
-            <Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
-            <Link to="/sitemap" className="hover:text-primary transition-colors">Sitemap</Link>
+        {/* Bottom Bar */}
+        <div className="border-t border-slate-800 pt-8 mt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
+            <p>© {new Date().getFullYear()} TG Pharmz. All rights reserved.</p>
+            <div className="flex gap-8">
+              <Link to="/privacy" className="hover:text-blue-400 transition-colors">Privacy Policy</Link>
+              <Link to="/terms" className="hover:text-blue-400 transition-colors">Terms of Service</Link>
+              <Link to="/sitemap" className="hover:text-blue-400 transition-colors">Sitemap</Link>
+            </div>
           </div>
         </div>
       </div>

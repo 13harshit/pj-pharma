@@ -81,7 +81,7 @@ const ContractManufacturing = () => {
                                     Contract Manufacturing
                                 </h1>
                                 <p className="text-slate-800 font-medium leading-relaxed">
-                                    GJ Pharmaceuticals LLP offers comprehensive Contract Manufacturing solutions across a spectrum of industries. Leveraging our state-of-the-art facilities, expertise, and a commitment to quality, we partner with businesses seeking reliable and high-quality manufacturing services.
+                                    TG PHARMZ LLP offers comprehensive Contract Manufacturing solutions across a spectrum of industries. Leveraging our state-of-the-art facilities, expertise, and a commitment to quality, we partner with businesses seeking reliable and high-quality manufacturing services.
                                 </p>
                             </motion.div>
                         </div>
@@ -102,7 +102,7 @@ const ContractManufacturing = () => {
                             Your Partner in Production
                         </h2>
                         <p className="text-muted-foreground">
-                            Whether you’re seeking a reliable partner for manufacturing your products or looking to outsource production processes, GJ Pharmaceuticals LLP offers the expertise, facilities, and dedication necessary to bring your vision to fruition.
+                            Whether you’re seeking a reliable partner for manufacturing your products or looking to outsource production processes, TG PHARMZ LLP offers the expertise, facilities, and dedication necessary to bring your vision to fruition.
                         </p>
                     </motion.div>
 

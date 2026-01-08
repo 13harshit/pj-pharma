@@ -34,7 +34,7 @@ const QualityControl = () => {
                         {/* Image Section */}
                         <div className="md:w-3/5 relative min-h-[400px]">
                             <img
-                                src="/gjq.jpg"
+                                src="/quality-control.jpg"
                                 alt="Quality Control Specialist"
                                 className="w-full h-full object-cover"
                             />

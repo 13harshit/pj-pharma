@@ -15,7 +15,7 @@ export const CTASection = () => {
     >
       {/* Background */}
       <div className="absolute inset-0 gradient-hero" />
-      
+
       {/* Animated Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -47,7 +47,7 @@ export const CTASection = () => {
             Ready to Partner with Us?
           </h2>
           <p className="text-white/70 text-lg mb-10 max-w-2xl mx-auto">
-            Join our global network of healthcare partners and experience the GJ Pharmaceuticals difference. 
+            Join our global network of healthcare partners and experience the TG PHARMZ difference.
             Let's build a healthier world together.
           </p>
 

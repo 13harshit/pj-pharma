@@ -27,6 +27,9 @@ const Contact = () => {
         'Registered Office:',
         '506/507, Ajmera Sikova, 23, Nityanand Nagar, Opp. Damodar Park, Ghatkopar West, Mumbai - 400086.',
         '',
+        'Head Office:',
+        'Goregoan, Mumbai - 400104.',
+        '',
         'Corporate Office:',
         'A-308 Privilon b/h Iscon Temple, Iscon Cross Road Ahmedabad - 380015, Gujrat, INDIA'
       ],
@@ -34,12 +37,12 @@ const Contact = () => {
     {
       icon: Phone,
       title: t('contact.call'),
-      details: ['+91 9167369755', '(Call & WhatsApp)'],
+      details: ['+91 9167369755', '+91 7977299867','(Call & WhatsApp)'],
     },
     {
       icon: Mail,
       title: t('contact.email'),
-      details: ['gjpharmaceuticalsllp@gmail.com'],
+      details: ['info@tgpharmz.com'],
     },
     {
       icon: FileText,
@@ -91,7 +94,7 @@ const Contact = () => {
             </blockquote>
             <div className="flex flex-col items-center relative z-10">
               <div className="font-bold text-lg text-[#FF6B00]">Dhiraj Rathod</div>
-              <div className="text-slate-500 font-medium">Founder, CEO of GJ Pharmaceuticals LLP</div>
+              <div className="text-slate-500 font-medium">Founder, CEO of TG PHARMZ LLP</div>
             </div>
           </div>
         </div>

@@ -85,7 +85,7 @@ const SalesDistribution = () => {
                                     Sales & Distribution Network
                                 </h1>
                                 <p className="text-slate-600 font-medium leading-relaxed">
-                                    At GJ Pharmaceuticals LLP, our extensive sales and distribution network forms the backbone of our global reach. We take pride in our robust network that ensures efficient, timely, and widespread availability of our diverse range of products across the globe.
+                                    At TG PHARMZ LLP, our extensive sales and distribution network forms the backbone of our global reach. We take pride in our robust network that ensures efficient, timely, and widespread availability of our diverse range of products across the globe.
                                 </p>
                             </div>
                         </motion.div>
@@ -106,7 +106,7 @@ const SalesDistribution = () => {
                             Building Lasting Partnerships
                         </h2>
                         <p className="text-muted-foreground text-lg leading-relaxed">
-                            At GJ Pharmaceuticals LLP, our sales and distribution network isn’t just about moving products—it’s about building lasting partnerships, ensuring accessibility, and delivering excellence across borders.
+                            At TG PHARMZ LLP, our sales and distribution network isn’t just about moving products—it’s about building lasting partnerships, ensuring accessibility, and delivering excellence across borders.
                         </p>
                     </motion.div>
 

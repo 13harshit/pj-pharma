@@ -108,7 +108,7 @@ const FoodGrains = () => {
 
                     {/* Why Choose Us */}
                     <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl p-8 md:p-12 border border-gray-200">
-                        <h2 className="text-3xl font-bold mb-8 text-primary border-b border-gray-200 pb-4 inline-block">Why Choose GJ Pharmaceuticals LLP?</h2>
+                        <h2 className="text-3xl font-bold mb-8 text-primary border-b border-gray-200 pb-4 inline-block">Why Choose TG PHARMZ LLP?</h2>
                         <div className="space-y-6">
                             <div className="flex gap-4">
                                 <div className="w-2 h-2 rounded-full bg-primary mt-2.5 flex-shrink-0" />
@@ -135,7 +135,7 @@ const FoodGrains = () => {
                             </div>
 
                             <p className="text-lg font-medium text-primary pt-6 italic border-t border-primary/10 mt-6">
-                                Indulge in the culinary excellence of GJ Pharmaceuticals LLP. Elevate your dishes with the finest Food Grains, Oils & Spices that redefine gourmet cooking and bring the essence of quality to your kitchen.
+                                Indulge in the culinary excellence of TG PHARMZ LLP. Elevate your dishes with the finest Food Grains, Oils & Spices that redefine gourmet cooking and bring the essence of quality to your kitchen.
                             </p>
                         </div>
                     </div>

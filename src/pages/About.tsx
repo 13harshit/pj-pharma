@@ -1,9 +1,9 @@
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Target, Eye, Users, CheckCircle, Trophy, Globe, Briefcase } from 'lucide-react';
+import { Target, Eye, Users, CheckCircle, Trophy, Globe, Briefcase, Pill, Syringe, Droplet, FlaskConical, Stethoscope } from 'lucide-react';
 
 const About = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -32,6 +32,53 @@ const About = () => {
     { label: t('fact.turnover'), value: 'Rs. 2 – 5 Crore' },
   ];
 
+  /* Hero Image Carousel Logic */
+  const heroImages = [
+    "/medicine/ChatGPT Image Jan 5, 2026, 07_33_47 PM.png",
+    "/medicine/ChatGPT Image Jan 5, 2026, 07_33_50 PM.png",
+    "/TG-PHARMZ-Manufacturing.jpg"
+  ];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 4000); // Change every 4 seconds
+    return () => clearInterval(timer);
+  }, []);
+
+  /* Product Showcase Carousels */
+  const facilityImages = [
+    "/products/296136.jpg",
+    "/products/296137.jpg",
+    "/products/296138.jpg",
+    "/products/296139.jpg"
+  ];
+  const productImages = [
+    "/products/Arktob-Tobramycin-Sulphate-Injection.jpeg",
+    "/products/Biomoal-650-Tablets.jpeg",
+    "/products/Biomoxsalb.jpeg",
+    "/products/Bioprost.jpeg",
+    "/products/Biosalb-750-mg.jpeg",
+    "/products/Digestive-Enzymes.jpeg"
+  ];
+  const [currentFacilityIndex, setCurrentFacilityIndex] = useState(0);
+  const [currentProductIndex, setCurrentProductIndex] = useState(0);
+
+  useEffect(() => {
+    const facilityTimer = setInterval(() => {
+      setCurrentFacilityIndex((prev) => (prev + 1) % facilityImages.length);
+    }, 3000);
+    return () => clearInterval(facilityTimer);
+  }, []);
+
+  useEffect(() => {
+    const productTimer = setInterval(() => {
+      setCurrentProductIndex((prev) => (prev + 1) % productImages.length);
+    }, 3000);
+    return () => clearInterval(productTimer);
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
@@ -53,7 +100,7 @@ const About = () => {
               </span>
               <h1 className="text-4xl sm:text-5xl font-bold text-slate-800 mb-6 leading-tight">
                 {t('aboutPage.welcome')} <br />
-                <span className="text-[#FF6B00]">GJ PHARMACEUTICALS LLP</span>
+                <span className="text-[#FF6B00]">TG PHARMZ</span>
               </h1>
               <p className="text-slate-600 text-lg mb-6 leading-relaxed">
                 {t('aboutPage.intro')}
@@ -72,12 +119,34 @@ const About = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
-                <img
-                  src="/GJ-Pharmaceutical-Manufacturing.jpg"
-                  alt="GJ Pharmaceutical Manufacturing"
-                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
-                />
+              <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white relative bg-slate-100">
+                <AnimatePresence mode='wait'>
+                  <motion.img
+                    key={currentImageIndex}
+                    src={heroImages[currentImageIndex]}
+                    alt={`TG PHARMZ Facility ${currentImageIndex + 1}`}
+                    className="w-full h-full object-cover absolute inset-0"
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1.5 }}
+                  />
+                </AnimatePresence>
+
+                {/* Carousel Indicators */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                  {heroImages.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentImageIndex(index)}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentImageIndex
+                        ? 'bg-white w-6'
+                        : 'bg-white/50 hover:bg-white/80'
+                        }`}
+                      aria-label={`Go to slide ${index + 1}`}
+                    />
+                  ))}
+                </div>
               </div>
               <div className="absolute -bottom-6 -left-6 z-[-1] w-24 h-24 bg-[#FF6B00]/20 rounded-full blur-xl" />
               <div className="absolute -top-6 -right-6 z-[-1] w-32 h-32 bg-teal-500/20 rounded-full blur-xl" />
@@ -186,6 +255,110 @@ const About = () => {
                 {t('aboutPage.strengthsDesc')}
               </p>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Product Showcase Section */}
+      <section className="py-20 bg-white overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="w-full">
+            <div className="grid md:grid-cols-2 gap-8 mb-8 items-stretch">
+              {/* Left Column: Facility Images + Icons */}
+              <div className="flex flex-col gap-6">
+                {/* Facility Carousel */}
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  className="relative flex-grow"
+                >
+                  <div className="h-full rounded-2xl overflow-hidden shadow-xl bg-slate-100 relative min-h-[300px]">
+                    <AnimatePresence mode='wait'>
+                      <motion.img
+                        key={currentFacilityIndex}
+                        src={facilityImages[currentFacilityIndex]}
+                        alt={`EU GMP / USFDA Certified Manufacturing Facility ${currentFacilityIndex + 1}`}
+                        className="w-full h-full object-cover absolute inset-0"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 1 }}
+                      />
+                    </AnimatePresence>
+                    {/* Overlay Badge */}
+                    <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-lg max-w-[280px]">
+                      <p className="text-slate-800 font-bold text-sm mb-1">EU GMP / USFDA</p>
+                      <p className="text-slate-600 text-sm">Certified Manufacturing Facility.</p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Scrolling Icons Section - Positioned below left image */}
+                <div className="relative overflow-hidden py-4 bg-slate-50 rounded-xl">
+                  <div className="flex gap-8 md:gap-12 animate-scroll-icons">
+                    {/* Duplicate icons for seamless loop */}
+                    {[...Array(3)].map((_, setIndex) => (
+                      <div key={setIndex} className="flex gap-8 md:gap-12 shrink-0">
+                        <div className="flex flex-col items-center gap-2 w-16">
+                          <div className="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center">
+                            <Pill className="w-6 h-6 text-blue-600" />
+                          </div>
+                          {/* <p className="text-xs text-slate-600 text-center font-medium">Tablets</p> */}
+                        </div>
+                        <div className="flex flex-col items-center gap-2 w-16">
+                          <div className="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center">
+                            <Syringe className="w-6 h-6 text-purple-600" />
+                          </div>
+                          {/* <p className="text-xs text-slate-600 text-center font-medium">Injections</p> */}
+                        </div>
+                        <div className="flex flex-col items-center gap-2 w-16">
+                          <div className="w-12 h-12 bg-teal-100 rounded-2xl flex items-center justify-center">
+                            <Droplet className="w-6 h-6 text-teal-600" />
+                          </div>
+                          {/* <p className="text-xs text-slate-600 text-center font-medium">IV Fluids</p> */}
+                        </div>
+                        <div className="flex flex-col items-center gap-2 w-16">
+                          <div className="w-12 h-12 bg-orange-100 rounded-2xl flex items-center justify-center">
+                            <FlaskConical className="w-6 h-6 text-orange-600" />
+                          </div>
+                          {/* <p className="text-xs text-slate-600 text-center font-medium">Lab Tests</p> */}
+                        </div>
+                        <div className="flex flex-col items-center gap-2 w-16">
+                          <div className="w-12 h-12 bg-red-100 rounded-2xl flex items-center justify-center">
+                            <Stethoscope className="w-6 h-6 text-red-600" />
+                          </div>
+                          {/* <p className="text-xs text-slate-600 text-center font-medium">Medical</p> */}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Product Images Carousel - Full Height */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="relative h-full"
+              >
+                <div className="h-full rounded-2xl overflow-hidden shadow-xl bg-white relative flex items-center justify-center p-0 min-h-[400px]">
+                  <AnimatePresence mode='wait'>
+                    <motion.img
+                      key={currentProductIndex}
+                      src={productImages[currentProductIndex]}
+                      alt={`Product ${currentProductIndex + 1}`}
+                      className="w-full h-full object-cover"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.8 }}
+                    />
+                  </AnimatePresence>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>

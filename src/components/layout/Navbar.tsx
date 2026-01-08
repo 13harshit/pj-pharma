@@ -61,10 +61,10 @@ export const Navbar = () => {
           ]
         },
         { label: t('nav.nutraceutical'), href: '/products/nutraceutical' },
-        { label: t('nav.herbal'), href: '/products/herbal' },
+        { label: t('nav.herbal'), href: '/herbal-and-cosmetics' },
         { label: t('nav.foodgrains'), href: '/products/food-grains' },
         { label: t('nav.chemicals'), href: '/products/chemicals' },
-        { label: t('nav.oil'), href: '/products/oil-lubricants' }
+        { label: t('nav.oil'), href: '/oil-and-lubricants' }
       ]
     },
     { label: t('nav.rd'), href: '/research' },
@@ -105,11 +105,8 @@ export const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-2">
-            <img src="/tg-pharmz-logo.png" alt="TG PHARMZ" className="h-12 w-auto" />
-            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-500">
-              TG PHARMZ
-            </span>
+          <Link to="/" className="flex items-center">
+            <img src="/tg-pharmz-logo.png" alt="TG PHARMZ" className="h-20 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}

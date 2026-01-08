@@ -8,7 +8,7 @@ const testimonials = [
     role: 'Chief Medical Officer',
     company: 'Apollo Hospitals',
     image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=100&h=100&fit=crop&crop=face',
-    content: 'GJ Pharmaceuticals has been our trusted partner for over a decade. Their commitment to quality and timely delivery is unmatched in the industry.',
+    content: 'TG PHARMZ has been our trusted partner for over a decade. Their commitment to quality and timely delivery is unmatched in the industry.',
     rating: 5,
   },
   {

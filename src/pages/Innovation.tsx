@@ -64,11 +64,11 @@ const Innovation = () => {
                                 className="bg-white/90 backdrop-blur-md p-8 md:p-10 rounded-3xl border border-white/20 shadow-2xl"
                             >
                                 <h1 className="text-3xl md:text-4xl font-bold text-[#FF6B00] mb-6">
-                                    Innovation at GJ Pharmaceuticals LLP
+                                    Innovation at TG PHARMZ LLP
                                 </h1>
                                 <div className="space-y-4 text-slate-700 font-medium leading-relaxed">
                                     <p>
-                                        At GJ Pharmaceuticals LLP, innovation isn't just a goal—it's the driving force that propels us forward in delivering cutting-edge solutions across diverse product categories. We believe in pushing boundaries, fostering creativity, and redefining industry standards through innovation.
+                                        At TG PHARMZ LLP, innovation isn't just a goal—it's the driving force that propels us forward in delivering cutting-edge solutions across diverse product categories. We believe in pushing boundaries, fostering creativity, and redefining industry standards through innovation.
                                     </p>
                                     <p>
                                         Product innovation has been the key driver to our global success and understanding the science eventually helps us develop better compounds to combat disease, which has immensely shaped our competitive edge on the global platform.

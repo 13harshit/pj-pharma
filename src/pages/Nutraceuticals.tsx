@@ -511,7 +511,7 @@ const Nutraceuticals = () => {
                         Nutraceuticals and Food Supplements
                     </span>
                     <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center max-w-4xl leading-tight">
-                        Welcome to the world of Nutraceuticals and Food Supplements at GJ Pharmaceuticals LLP, where science and nature converge to support your well-being.
+                        Welcome to the world of Nutraceuticals and Food Supplements at TG PHARMZ, where science and nature converge to support your well-being.
                     </h1>
                     <p className="max-w-3xl text-center text-lg text-gray-200 leading-relaxed">
                         Our range of premium nutraceuticals and food supplements is crafted with precision, backed by scientific research, and designed to enhance the vitality of individuals seeking a holistic approach to health.

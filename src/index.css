@@ -245,4 +245,22 @@
     opacity: 0.03;
     pointer-events: none;
   }
+
+  /* Scrolling Icons Animation */
+  @keyframes scroll-icons {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll-icons {
+    animation: scroll-icons 20s linear infinite;
+  }
+
+  .animate-scroll-icons:hover {
+    animation-play-state: paused;
+  }
 }

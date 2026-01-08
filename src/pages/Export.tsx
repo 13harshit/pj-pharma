@@ -69,7 +69,7 @@ const Export = () => {
                                     Export
                                 </h1>
                                 <p className="text-gray-100 font-medium leading-relaxed">
-                                    Welcome to GJ Pharmaceuticals LLP, your trusted partner in the export of high-quality products across diverse categories. We pride ourselves on delivering excellence in every shipment, catering to various industries globally.
+                                    Welcome to TG PHARMZ LLP, your trusted partner in the export of high-quality products across diverse categories. We pride ourselves on delivering excellence in every shipment, catering to various industries globally.
                                 </p>
                             </motion.div>
                         </div>

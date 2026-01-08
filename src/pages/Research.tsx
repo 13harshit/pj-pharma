@@ -141,7 +141,7 @@ const Research = () => {
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
               In the dynamic landscape of pharmaceuticals, Research and Development (R&D) stands as the cornerstone of innovation and progress.
-              At GJ Pharmaceuticals LLP, we recognize the pivotal role of R&D in shaping the future of healthcare and pharmaceutical solutions.
+              At TG PHARMZ, we recognize the pivotal role of R&D in shaping the future of healthcare and pharmaceutical solutions.
             </p>
           </motion.div>
         </div>

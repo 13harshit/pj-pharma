@@ -8,24 +8,26 @@ import Autoplay from 'embla-carousel-autoplay';
 import { useEffect, useState } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 
+import { Link } from 'react-router-dom';
+
 const Index = () => {
   const { t } = useLanguage();
 
   const products = [
-    t('nav.pharmaceutical'),
-    t('nav.nutraceutical'),
-    t('nav.herbal'),
-    t('nav.foodgrains'),
-    t('nav.chemicals'),
-    t('nav.oil')
+    { name: t('nav.pharmaceutical'), path: '/products/pharmaceutical' },
+    { name: t('nav.nutraceutical'), path: '/products/nutraceutical' },
+    { name: t('nav.herbal'), path: '/herbal-and-cosmetics' },
+    { name: t('nav.foodgrains'), path: '/products/food-grains' },
+    { name: t('nav.chemicals'), path: '/products/chemicals' },
+    { name: t('nav.oil'), path: '/oil-and-lubricants' }
   ];
 
   const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 4000 })]);
 
   const carouselImages = [
-    "/GJ-Pharmaceuticals-LLP-Manufacturing-Factory.jpg",
-    "/GJ-Pharmaceuticals-LLP-Manufacturing-Unit.jpg",
-    "/GJ-Pharmaceuticals-LLP-Manufacturing-Company.jpg"
+    "/TG-PHARMZ-Manufacturing-Factory.jpg",
+    "/TG-PHARMZ-Manufacturing-Unit.jpg",
+    "/TG-PHARMZ-Manufacturing-Company.jpg"
   ];
 
   return (
@@ -89,13 +91,17 @@ const Index = () => {
             >
               <div className="flex flex-col">
                 {products.map((item, index) => (
-                  <div key={index} className="flex items-center gap-4 p-4 hover:bg-white/10 rounded-xl cursor-pointer transition-colors border-b border-white/5 last:border-0 group">
+                  <Link
+                    key={index}
+                    to={item.path}
+                    className="flex items-center gap-4 p-4 hover:bg-white/10 rounded-xl cursor-pointer transition-colors border-b border-white/5 last:border-0 group"
+                  >
                     <div className="w-10 h-10 rounded-lg border border-[#FF6B00] flex items-center justify-center text-[#FF6B00] group-hover:bg-[#FF6B00] group-hover:text-white transition-colors">
                       {/* Using a generic icon or could map specific ones */}
                       <div className="w-4 h-4 border-2 border-current rounded-sm"></div>
                     </div>
-                    <span className="text-white font-medium text-lg">{item}</span>
-                  </div>
+                    <span className="text-white font-medium text-lg">{item.name}</span>
+                  </Link>
                 ))}
               </div>
             </motion.div>
