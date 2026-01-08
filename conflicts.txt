@@ -1,0 +1,44 @@
+On branch main
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Changes to be committed:
+	new file:   public/GJ-Pharmaceutical-Manufacturing.jpg
+	new file:   public/GJ-Pharmaceuticals-LLP-Manufacturing-Company.jpg
+	new file:   public/GJ-Pharmaceuticals-LLP-Manufacturing-Factory.jpg
+	new file:   public/GJ-Pharmaceuticals-LLP-Manufacturing-Unit.jpg
+	new file:   public/gjq.jpg
+	new file:   src/pages/Products.tsx
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+	both added:      index.html
+	both added:      package-lock.json
+	both added:      package.json
+	both added:      src/App.tsx
+	both added:      src/components/home/CTASection.tsx
+	both added:      src/components/home/TestimonialsSection.tsx
+	both added:      src/components/layout/Footer.tsx
+	both added:      src/components/layout/Navbar.tsx
+	both added:      src/hooks/useLanguage.tsx
+	both added:      src/index.css
+	both added:      src/pages/About.tsx
+	both added:      src/pages/Contact.tsx
+	both added:      src/pages/ContractManufacturing.tsx
+	both added:      src/pages/Export.tsx
+	both added:      src/pages/Index.tsx
+	both added:      src/pages/Innovation.tsx
+	both added:      src/pages/Manufacturing.tsx
+	both added:      src/pages/QualityControl.tsx
+	both added:      src/pages/Research.tsx
+	both added:      src/pages/SalesDistribution.tsx
+	both added:      vite.config.ts
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	conflicts.txt
+	pull_conflict_output.txt
+	pull_output.txt
+	status.txt
+
